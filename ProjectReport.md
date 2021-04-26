@@ -1,48 +1,39 @@
 # Project Report
 
-(Put your name here)
-
-## Markdown Tips
-
-If you are unfamiliar with MarkDown, check out 
-[the official documentation](https://guides.github.com/features/mastering-markdown/).
-
-Note that IntelliJ IDEA has a Markdown preview that you can access in 
-the upper-right of the editor. Also, since Markdown documents&mdash;like
-source code&mdash;should be human-readable, make sure you keep your lines
-short, as you can see I have done in my Markdown files.
-
-Please remove this subsection before submitting your report. 
+Annie Peabody
 
 ## Challenge #1 Complete
 
-(Explain your solution to Challenge #1. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+In QueryEngineModule I changed
 
-## Challenge #2 Complete
+"bind(QueryEngine.class).to(**FakeQueryEngine**.class);" 
 
-(Explain your solution to Challenge #2. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+to
+
+"bind(QueryEngine.class).to(**WikipediaQueryEngine** .class);"
+
+## Challenge #2 Incomplete
+
+I created a RevisionNew class and a NewRevisionFormatter class to try to change the formatting of the dates.
+I spent a lot of tme trying to understand the existing code and how Instant works and how I could change it 
+to LocalDateTime but I was never able to figure out how to convert the date to a new format and had to move on.
 
 ## Challenge #3 Complete
 
-(Explain your solution to Challenge #3. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+I changed the original for loop to:
+
+String stringBuilder = response.revisions().stream().map(formatter::format).collect(Collectors.joining("\n"));
 
 ## Reflection Question #1: Functional vs OO
 
-(Write one or more paragraphs comparing and contrasting the iterative and functional  
-approaches to string concatenation you explored in challenge #3. Which do you
-prefer, and why?)
+I prefer the iterative version if only because I have a stronger understanding of how it works compared to streams. 
+To me, it looks cleaner and although it probably varies case the case ,I don't think that in this instance it was much shorter or saved more time.
+I can definitely see where streams would be applicable, but I think for clarity from programmer to programmer I would prefer the iterative version.
 
 ## Reflection Question #2: Polymorphism and Dependency Inversion
 
-(Explain how polymorphism engendered dependency inversion in this little
-application. Be clear and precise here, as this is, in part, an assessment of
-your correct use of technical terminology.
-Consider, for example, where exactly is polymorphism used?
-Where exactly is a dependency inverted?)
+Polymorphism in this application created better data abstraction so functions become more versatile and weave together and depend on one another rather than
+having separate long functions that only perform a task once. The Revision class uses a lot of polymorphism as it is utilized by almost every other class in the application
+despite only having a few short functions within it. Wikipedia Analyzer is an important class that relies on very few other classes but does have plenty of abstraction it depends on,
+it displays strong dependency inversion.
 

@@ -5,6 +5,7 @@ import com.jayway.jsonpath.JsonPath;
 
 import java.io.InputStream;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -15,17 +16,17 @@ public final class ResponseParser {
         DocumentContext context = JsonPath.parse(in);
         List<Map<String,String>> objects = context.read("$..revisions.*");
         for (var object : objects) {
-            Revision revision = makeRevisionFrom(object);
+            RevisionNew revision = makeRevisionFrom(object);
             builder.add(revision);
         }
         return builder.build();
     }
 
-    private Revision makeRevisionFrom(Map<String, String> object) {
+    private RevisionNew makeRevisionFrom(Map<String, String> object) {
         String name = object.get("user");
         String timestampString = object.get("timestamp");
         Instant timestamp = Instant.parse(timestampString);
-        return Revision.editor(name).timestamp(timestamp);
+        return RevisionNew.editor(name).timestamp(timestamp);
     }
 
 }

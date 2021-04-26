@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 
 public final class FakeQueryEngine implements QueryEngine {
 
@@ -20,7 +21,7 @@ public final class FakeQueryEngine implements QueryEngine {
             System.err.println("Unexpected interruption: " + e.getLocalizedMessage());
         }
         QueryResponse.Builder builder = new QueryResponse.Builder();
-        builder.add(Revision.editor("Billy Bologna").timestamp(Instant.now()));
+        builder.add(RevisionNew.editor("Billy Bologna").timestamp(Instant.now()));
         return builder.build();
     }
 }
